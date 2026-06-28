@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Prodiges Expérience · EJP</title>
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ===== BASE ===== */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Arial Black', 'Impact', sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0a0f;
+      padding: 0;
+    }
+
+    /* ===== BACKGROUND PAINT ===== */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+      background: #0a0a0f;
+    }
+
+    .paint-blob-1 {
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.6), rgba(67, 56, 202, 0.3));
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: paintMove1 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes paintMove1 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      33% { transform: translate(20%, 15%) scale(1.3) rotate(20deg); }
+      66% { transform: translate(-10%, 25%) scale(0.9) rotate(-15deg); }
+      100% { transform: translate(15%, -10%) scale(1.2) rotate(10deg); }
+    }
+
+    .paint-blob-2 {
+      position: absolute;
+      bottom: -30%;
+      right: -20%;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(circle at 70% 60%, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.2));
+      border-radius: 50%;
+      filter: blur(70px);
+      animation: paintMove2 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes paintMove2 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate(-15%, -20%) scale(1.4) rotate(-25deg); }
+      100% { transform: translate(10%, -10%) scale(0.8) rotate(15deg); }
+    }
+
+    .paint-blob-3 {
+      position: absolute;
+      top: 40%;
+      left: 30%;
+      width: 50%;
+      height: 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.3), rgba(245, 158, 11, 0.1));
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: paintMove3 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes paintMove3 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      25% { transform: translate(-30%, -20%) scale(1.5) rotate(30deg); }
+      75% { transform: translate(20%, 30%) scale(0.7) rotate(-20deg); }
+      100% { transform: translate(-10%, -15%) scale(1.3) rotate(10deg); }
+    }
+
+    .paint-blob-4 {
+      position: absolute;
+      bottom: 10%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle at 40% 60%, rgba(6, 182, 212, 0.3), rgba(8, 145, 178, 0.1));
+      border-radius: 50%;
+      filter: blur(90px);
+      animation: paintMove4 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes paintMove4 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      40% { transform: translate(40%, -20%) scale(1.6) rotate(-30deg); }
+      80% { transform: translate(-20%, 30%) scale(0.8) rotate(20deg); }
+      100% { transform: translate(20%, 10%) scale(1.2) rotate(-10deg); }
+    }
+
+    .paint-blob-5 {
+      position: absolute;
+      top: -10%;
+      right: 10%;
+      width: 40%;
+      height: 40%;
+      background: radial-gradient(circle at 60% 40%, rgba(52, 211, 153, 0.2), rgba(16, 185, 129, 0.1));
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: paintMove5 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes paintMove5 {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      60% { transform: translate(-30%, 40%) scale(1.8) rotate(25deg); }
+      100% { transform: translate(20%, -30%) scale(0.6) rotate(-15deg); }
+    }
+
+    .paint-drip {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .drip {
+      position: absolute;
+      width: 4px;
+      border-radius: 0 0 50% 50%;
+      animation: dripFall linear infinite;
+    }
+
+    .drip:nth-child(1) { left: 10%; animation-duration: 4s; animation-delay: 0s; height: 60px; background: rgba(139, 92, 246, 0.3); }
+    .drip:nth-child(2) { left: 25%; animation-duration: 5s; animation-delay: 1s; height: 80px; background: rgba(236, 72, 153, 0.25); }
+    .drip:nth-child(3) { left: 40%; animation-duration: 3.5s; animation-delay: 0.5s; height: 50px; background: rgba(255, 215, 0, 0.2); }
+    .drip:nth-child(4) { left: 55%; animation-duration: 6s; animation-delay: 2s; height: 100px; background: rgba(6, 182, 212, 0.2); }
+    .drip:nth-child(5) { left: 70%; animation-duration: 4.5s; animation-delay: 1.5s; height: 70px; background: rgba(52, 211, 153, 0.2); }
+    .drip:nth-child(6) { left: 85%; animation-duration: 5.5s; animation-delay: 0.8s; height: 90px; background: rgba(139, 92, 246, 0.25); }
+    .drip:nth-child(7) { left: 15%; animation-duration: 7s; animation-delay: 3s; height: 120px; background: rgba(255, 215, 0, 0.15); }
+    .drip:nth-child(8) { left: 65%; animation-duration: 4.2s; animation-delay: 2.5s; height: 65px; background: rgba(236, 72, 153, 0.2); }
+
+    @keyframes dripFall {
+      0% { transform: translateY(-100px); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1) rotate(720deg); opacity: 0; }
+    }
+
+    .vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ===== CONTAINER PRINCIPAL ===== */
+    .container {
+      position: relative;
+      z-index: 3;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    /* ===== CONTENU PLEIN ÉCRAN ===== */
+    .content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 16px 16px;
+    }
+
+    /* ===== IMAGE EN HAUT (LOGO ROND) ===== */
+    .top-image {
+      text-align: center;
+      flex-shrink: 0;
+      margin-bottom: 4px;
+    }
+
+    .top-image .logo-wrapper {
+      display: inline-block;
+      width: clamp(70px, 15vw, 120px);
+      height: clamp(70px, 15vw, 120px);
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #FFD700, #8B5CF6, #EC4899);
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
+      50% { box-shadow: 0 0 60px rgba(255, 215, 0, 0.3); }
+    }
+
+    .top-image .logo-wrapper img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .header .prodiges {
+       font-size: clamp(32px, 8vw, 72px);
+      font-weight: 900;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #9c8607 0%, #F59E0B 40%, #8B5CF6 80%, #EC4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-top: -4px;
+      background-size: 200% 200%;
+      animation: shimmer 4s ease-in-out infinite alternate;
+    }
+
+    .header .prodiges span {
+      color: #9c8607 ;
+      text-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+    }
+
+    .header .experience {
+      font-size: clamp(32px, 8vw, 72px);
+      letter-spacing: 6px;
+      color: #8B5CF6;
+      text-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+      font-weight: 900;
+      line-height: 1;
+      font-family: 'Brusher';
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .header .youth-squad {
+      font-size: clamp(16px, 3.5vw, 32px);
+      font-weight: 700;
+      letter-spacing: 8px;
+      color: rgba(255, 255, 255, 0.25);
+      font-family: 'Arial', sans-serif;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+      min-height: 0;
+      padding: 4px 0;
+    }
+
+    /* ===== RENDEZ-VOUS AVEC CADRE ===== */
+    .rendezvous-wrapper {
+      display: inline-block;
+      padding: 6px 24px;
+      border: 2px solid transparent;
+      border-image: linear-gradient(135deg, #FFD700, #8B5CF6, #EC4899) 1;
+      border-radius: 12px;
+      background: rgba(10, 10, 15, 0.5);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
+      margin-bottom: 6px;
+    }
+
+    .rendezvous {
+      font-size: clamp(18px, 4vw, 36px);
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ===== COUNTDOWN AVEC BORDURES ===== */
+    .countdown {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(12px, 3vw, 30px);
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 4px;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 12px 6px;
+      border: 2px solid transparent;
+      border-image: linear-gradient(135deg, #FFD700, #8B5CF6, #EC4899) 1;
+      border-radius: 16px;
+      background: rgba(10, 10, 15, 0.4);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);
+      min-width: 70px;
+    }
+
+    .countdown-item span {
+      font-size: clamp(60px, 18vw, 140px);
+      font-weight: 900;
+      background: linear-gradient(180deg, #fff 0%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 80px rgba(139, 92, 246, 0.2);
+      letter-spacing: 4px;
+      line-height: 1;
+    }
+
+    .countdown-item span.gold {
+      background: linear-gradient(180deg, #FFD700 0%, #F59E0B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 80px rgba(255, 215, 0, 0.15);
+    }
+
+    .countdown-item small {
+      font-size: clamp(10px, 2vw, 16px);
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+      font-family: 'Arial', sans-serif;
+      margin-top: -2px;
+    }
+
+    .countdown-separator {
+      font-size: clamp(40px, 12vw, 100px);
+      font-weight: 900;
+      color: rgba(139, 92, 246, 0.2);
+      margin-top: -10px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.7; }
+    }
+
+    /* ===== INFOS LIEU ===== */
+    .infos {
+      text-align: center;
+      flex-shrink: 0;
+      padding: 4px 0 2px;
+    }
+
+    .infos .location {
+      font-size: clamp(16px, 3.5vw, 28px);
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .infos .address {
+      font-size: clamp(11px, 2vw, 16px);
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.25);
+      font-family: 'Arial', sans-serif;
+      margin-top: 2px;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      text-align: center;
+      flex-shrink: 0;
+      padding-top: 6px;
+    }
+
+    .cta .btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 400px;
+      padding: 16px 24px;
+      font-size: clamp(18px, 4vw, 30px);
+      font-weight: 900;
+      font-family: 'Arial Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #0a0a0f;
+      background: linear-gradient(135deg, #FFD700 0%, #F59E0B 100%);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 60px rgba(255, 215, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+
+    .cta .btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 0 80px rgba(255, 215, 0, 0.3);
+    }
+
+    .cta .btn .sub {
+      display: block;
+      font-size: clamp(10px, 1.8vw, 14px);
+      font-weight: 400;
+      letter-spacing: 2px;
+      opacity: 0.6;
+      font-family: 'Arial', sans-serif;
+      margin-top: 2px;
+      text-transform: none;
+    }
+
+    /* ===== TICKET REFERENCE ===== */
+    .ticket-reference {
+      text-align: center;
+      font-size: clamp(9px, 1.5vw, 13px);
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.08);
+      font-family: 'Arial', sans-serif;
+      font-weight: 300;
+      padding-top: 4px;
+      flex-shrink: 0;
+      font-style: italic;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-height: 700px) {
+      .content { padding: 12px 10px 10px; }
+      .top-image .logo-wrapper { width: 60px; height: 60px; }
+      .header .prodiges { font-size: 26px; }
+      .header .experience { font-size: 26px; }
+      .header .youth-squad { font-size: 12px; letter-spacing: 4px; }
+      .rendezvous-wrapper { padding: 4px 16px; }
+      .rendezvous { font-size: 14px; }
+      .countdown-item { padding: 4px 8px 3px; min-width: 50px; }
+      .countdown-item span { font-size: 42px; }
+      .countdown-separator { font-size: 28px; }
+      .countdown-item small { font-size: 8px; }
+      .infos .location { font-size: 14px; }
+      .infos .address { font-size: 10px; }
+      .cta .btn { padding: 12px 16px; font-size: 14px; border-radius: 14px; }
+      .cta .btn .sub { font-size: 8px; }
+      .ticket-reference { font-size: 7px; }
+    }
+
+    @media (max-height: 560px) {
+      .top-image .logo-wrapper { width: 45px; height: 45px; }
+      .header .prodiges { font-size: 20px; }
+      .header .experience { font-size: 20px; }
+      .header .youth-squad { font-size: 10px; }
+      .rendezvous-wrapper { padding: 2px 12px; }
+      .rendezvous { font-size: 11px; }
+      .countdown-item { padding: 2px 6px 2px; min-width: 40px; }
+      .countdown-item span { font-size: 32px; }
+      .countdown-separator { font-size: 20px; }
+      .cta .btn { padding: 8px 12px; font-size: 11px; }
+    }
+
+    @media (min-width: 768px) {
+      .content { padding: 32px 40px 24px; }
+      .top-image .logo-wrapper { width: 140px; height: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND PAINT -->
+  <div class="background">
+    <div class="paint-blob-1"></div>
+    <div class="paint-blob-2"></div>
+    <div class="paint-blob-3"></div>
+    <div class="paint-blob-4"></div>
+    <div class="paint-blob-5"></div>
+
+    <div class="paint-drip">
+      <div class="drip"></div>
+      <div class="drip"></div>
+      <div class="drip"></div>
+      <div class="drip"></div>
+      <div class="drip"></div>
+      <div class="drip"></div>
+      <div class="drip"></div>
+      <div class="drip"></div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+    <div class="vignette"></div>
+  </div>
+
+  <!-- CONTENU PRINCIPAL -->
+  <div class="container">
+    <div class="content">
+
+      <!-- LOGO ROND -->
+      <div class="top-image">
+        <div class="logo-wrapper">
+          <!-- REMPLACE "logo.png" par le chemin de ton image -->
+          <img src="logo.png" alt="Prodiges Expérience" />
+        </div>
+      </div>
+
+      <!-- HEADER -->
+      <div class="header">
+        <div class="prodiges">✦ <h1><span>PRODIGES EXPERIENCE</span></h1> ✦</div>
+        <h5><div class="experience">L'EXPERIENCE A VIVRE</div></h5>
+        <div class="youth-squad">Youth Marvel's Squad</div>
+      </div>
+
+      <!-- MAIN -->
+      <main>
+
+        <!-- RENDEZ-VOUS AVEC CADRE -->
+        <div class="rendezvous-wrapper">
+          <div class="rendezvous">Rendez-vous dans</div>
+        </div>
+
+        <!-- Compte à rebours avec bordures -->
+        <div class="countdown" id="countdown">
+          <div class="countdown-item">
+            <span class="gold" id="days">00</span>
+            <small>Jours</small>
+          </div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-item">
+            <span id="hours">00</span>
+            <small>Heures</small>
+          </div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-item">
+            <span class="gold" id="minutes">00</span>
+            <small>Min</small>
+          </div>
+          <span class="countdown-separator">:</span>
+          <div class="countdown-item">
+            <span id="seconds">00</span>
+            <small>Sec</small>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- INFOS LIEU -->
+      <div class="infos">
+        <div class="rendezvous">Carrefour Cinquantenaire · 50m marché Quando</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== PARTICULES =====
+    (function initParticles() {
+      const container = document.getElementById('particles');
+      const count = 50;
+
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = 2 + Math.random() * 6;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (8 + Math.random() * 18) + 's';
+        p.style.animationDelay = (Math.random() * 15) + 's';
+        p.style.opacity = 0.1 + Math.random() * 0.5;
+        const colors = ['rgba(139, 92, 246, 0.5)', 'rgba(255, 215, 0, 0.4)', 'rgba(236, 72, 153, 0.4)', 'rgba(6, 182, 212, 0.3)', 'rgba(52, 211, 153, 0.3)'];
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        if (Math.random() > 0.7) {
+          p.style.borderRadius = '0';
+          p.style.transform = 'rotate(45deg)';
+        }
+        container.appendChild(p);
+      }
+    })();
+
+    // ===== SPLASH EFFECT =====
+    (function initSplashes() {
+      const bg = document.querySelector('.background');
+      function createSplash() {
+        const splash = document.createElement('div');
+        splash.className = 'splash';
+        const size = 10 + Math.random() * 40;
+        splash.style.width = size + 'px';
+        splash.style.height = size + 'px';
+        splash.style.left = (10 + Math.random() * 80) + '%';
+        splash.style.top = (10 + Math.random() * 80) + '%';
+        const colors = ['rgba(139, 92, 246, 0.3)', 'rgba(255, 215, 0, 0.25)', 'rgba(236, 72, 153, 0.25)', 'rgba(6, 182, 212, 0.2)'];
+        splash.style.background = colors[Math.floor(Math.random() * colors.length)];
+        splash.style.borderRadius = '50%';
+        splash.style.position = 'absolute';
+        splash.style.animation = 'splashPop 2s ease-out forwards';
+        bg.appendChild(splash);
+        setTimeout(() => { splash.remove(); }, 3000);
+      }
+      setInterval(createSplash, 3000);
+    })();
+
+    // ===== ANIMATION SPLASH =====
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = `
+      @keyframes splashPop {
+        0% { transform: scale(0); opacity: 1; }
+        50% { opacity: 0.8; }
+        100% { transform: scale(3); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // ===== COUNTDOWN =====
+    (function initCountdown() {
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+
+      function getNextSunday() {
+        const now = new Date();
+        const target = new Date(now);
+        target.setDate(now.getDate() + (7 - now.getDay()));
+        target.setHours(15, 29, 0, 0);
+        if (target <= now) {
+          target.setDate(target.getDate() + 7);
+        }
+        return target;
+      }
+
+      let targetDate = getNextSunday();
+
+      function pad(n) {
+        return String(n).padStart(2, '0');
+      }
+
+      function update() {
+        const now = new Date();
+        let diff = targetDate - now;
+        if (diff <= 0) {
+          daysEl.textContent = '00';
+          hoursEl.textContent = '00';
+          minutesEl.textContent = '00';
+          secondsEl.textContent = '00';
+          return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        const minutes = Math.floor(diff / (1000 * 60));
+        diff -= minutes * (1000 * 60);
+        const seconds = Math.floor(diff / 1000);
+        daysEl.textContent = pad(days);
+        hoursEl.textContent = pad(hours);
+        minutesEl.textContent = pad(minutes);
+        secondsEl.textContent = pad(seconds);
+      }
+
+      update();
+      setInterval(update, 1000);
+    })();
+
+    // ===== CTA =====
+    document.getElementById('ctaBtn').addEventListener('click', function(e) {
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => { this.style.transform = ''; }, 200);
+      alert('🔥 PRODIGES EXPERIENCE t\'attend !');
+    });
+
+    // ===== EMPÊCHER ZOOM =====
+    document.addEventListener('touchend', function(e) {
+      if (e.target.closest('.btn')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  </script>
+
+</body>
+</html>
