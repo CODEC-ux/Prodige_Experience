@@ -1,3 +1,5 @@
+         
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -37,6 +39,7 @@
       z-index: 0;
       overflow: hidden;
       background: #0a0a0f;
+      /* METS LE CHEMIN DE TON IMAGE ICI */
       background-image: url('background.jpg');
       background-size: cover;
       background-position: center;
@@ -67,7 +70,7 @@
       100% { transform: translateY(-10vh) scale(1) rotate(720deg); opacity: 0; }
     }
 
-    /* ===== OVERLAY SOMBRE ===== */
+    /* ===== OVERLAY SOMBRE (pour lisibilité) ===== */
     .overlay {
       position: absolute;
       top: 0;
@@ -91,7 +94,7 @@
       padding: 16px;
     }
 
-    /* ===== CONTENU ===== */
+    /* ===== CONTENU PLEIN ÉCRAN ===== */
     .content {
       width: 100%;
       height: 100%;
@@ -101,7 +104,7 @@
       padding: 20px 16px 16px;
     }
 
-    /* ===== LOGO ROND ===== */
+    /* ===== IMAGE EN HAUT (LOGO ROND) ===== */
     .top-image {
       text-align: center;
       flex-shrink: 0;
@@ -291,11 +294,40 @@
       padding: 4px 0 2px;
     }
 
-    .infos .lieu {
-      font-size: clamp(16px, 3.5vw, 28px);
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: rgba(255, 255, 255, 0.7);
+    /* ===== RESPONSIVE ===== */
+    @media (max-height: 700px) {
+      .content { padding: 12px 10px 10px; }
+      .top-image .logo-wrapper { width: 60px; height: 60px; }
+      .header .prodiges { font-size: 26px; }
+      .header .experience { font-size: 26px; }
+      .header .youth-squad { font-size: 12px; letter-spacing: 4px; }
+      .rendezvous-wrapper { padding: 4px 16px; }
+      .rendezvous { font-size: 14px; }
+      .countdown-item { padding: 4px 8px 3px; min-width: 50px; }
+      .countdown-item span { font-size: 42px; }
+      .countdown-separator { font-size: 28px; }
+      .countdown-item small { font-size: 8px; }
+      .cta .btn { padding: 12px 16px; font-size: 14px; border-radius: 14px; }
+      .cta .btn .sub { font-size: 8px; }
+      .ticket-reference { font-size: 7px; }
+    }
+
+    @media (max-height: 560px) {
+      .top-image .logo-wrapper { width: 45px; height: 45px; }
+      .header .prodiges { font-size: 20px; }
+      .header .experience { font-size: 20px; }
+      .header .youth-squad { font-size: 10px; }
+      .rendezvous-wrapper { padding: 2px 12px; }
+      .rendezvous { font-size: 11px; }
+      .countdown-item { padding: 2px 6px 2px; min-width: 40px; }
+      .countdown-item span { font-size: 32px; }
+      .countdown-separator { font-size: 20px; }
+      .cta .btn { padding: 8px 12px; font-size: 11px; }
+    }
+
+    @media (min-width: 768px) {
+      .content { padding: 32px 40px 24px; }
+      .top-image .logo-wrapper { width: 140px; height: 140px; }
     }
 
     /* ===== CTA ===== */
@@ -355,50 +387,15 @@
       flex-shrink: 0;
       font-style: italic;
     }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-height: 700px) {
-      .content { padding: 12px 10px 10px; }
-      .top-image .logo-wrapper { width: 60px; height: 60px; }
-      .header .prodiges { font-size: 26px; }
-      .header .experience { font-size: 26px; }
-      .header .youth-squad { font-size: 12px; letter-spacing: 4px; }
-      .rendezvous-wrapper { padding: 4px 16px; }
-      .rendezvous { font-size: 14px; }
-      .countdown-item { padding: 4px 8px 3px; min-width: 50px; }
-      .countdown-item span { font-size: 42px; }
-      .countdown-separator { font-size: 28px; }
-      .countdown-item small { font-size: 8px; }
-      .infos .lieu { font-size: 14px; }
-      .cta .btn { padding: 12px 16px; font-size: 14px; border-radius: 14px; }
-      .cta .btn .sub { font-size: 8px; }
-      .ticket-reference { font-size: 7px; }
-    }
-
-    @media (max-height: 560px) {
-      .top-image .logo-wrapper { width: 45px; height: 45px; }
-      .header .prodiges { font-size: 20px; }
-      .header .experience { font-size: 20px; }
-      .header .youth-squad { font-size: 10px; }
-      .rendezvous-wrapper { padding: 2px 12px; }
-      .rendezvous { font-size: 11px; }
-      .countdown-item { padding: 2px 6px 2px; min-width: 40px; }
-      .countdown-item span { font-size: 32px; }
-      .countdown-separator { font-size: 20px; }
-      .cta .btn { padding: 8px 12px; font-size: 11px; }
-    }
-
-    @media (min-width: 768px) {
-      .content { padding: 32px 40px 24px; }
-      .top-image .logo-wrapper { width: 140px; height: 140px; }
-    }
   </style>
 </head>
 <body>
 
   <!-- BACKGROUND IMAGE -->
   <div class="background">
+    <!-- Overlay sombre pour lisibilité -->
     <div class="overlay"></div>
+    <!-- Particules -->
     <div class="particles" id="particles"></div>
   </div>
 
@@ -409,6 +406,7 @@
       <!-- LOGO ROND -->
       <div class="top-image">
         <div class="logo-wrapper">
+          <!-- REMPLACE "logo.png" par le chemin de ton image -->
           <img src="logo.png" alt="Prodiges Expérience" />
         </div>
       </div>
@@ -428,13 +426,14 @@
           <div class="rendezvous">Rendez-vous dans</div>
         </div>
 
-        <!-- COUNTDOWN AVEC BORDURES -->
+        <!-- Compte à rebours avec bordures -->
         <div class="countdown" id="countdown">
+
+          <span class="countdown-separator">:</span>
           <div class="countdown-item">
             <span class="gold" id="days">00</span>
             <small>Jours</small>
           </div>
-          <span class="countdown-separator">:</span>
           <div class="countdown-item">
             <span id="hours">00</span>
             <small>Heures</small>
@@ -453,21 +452,7 @@
 
       </main>
 
-      <!-- INFOS LIEU -->
-      <div class="infos">
-        <div class="lieu">Carrefour Cinquantenaire · 50m marché Quando</div>
-      </div>
-
-      <!-- CTA -->
-      <div class="cta">
-        <button class="btn" id="ctaBtn">
-          JE VIENS
-          <span class="sub">Réserve ta place</span>
-        </button>
-      </div>
-
-      <!-- TICKET REFERENCE -->
-      <div class="ticket-reference">✧ Le Diplomancé à Vinée ✧</div>
+      
 
     </div>
   </div>
